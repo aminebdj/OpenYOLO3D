@@ -1,0 +1,10 @@
+# ninja log v5
+3	16339	1716815443290452011	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/interpolate_gpu.o	1110d6105579f2ec
+2	16424	1716815443382452213	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/group_points_gpu.o	d52b03808d6848ab
+1	17576	1716815444530454744	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/ball_query_gpu.o	4f1d3dbcad794901
+4	17716	1716815444666455043	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/sampling_gpu.o	13eb66e506d5b99f
+2	18032	1716815444986455748	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/group_points.o	85685dcd2a08be4c
+2	18178	1716815445154456117	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/bindings.o	f599a3ced814a9dd
+1	18190	1716815445162456135	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/ball_query.o	3be9456cf5d2266e
+3	18398	1716815445374456601	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/sampling.o	5d937f5708244c2e
+3	18865	1716815445834457612	/home/jean/Amine/OpenYolo3D/models/Mask3D/third_party/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/interpolate.o	42bd13a6265f3342

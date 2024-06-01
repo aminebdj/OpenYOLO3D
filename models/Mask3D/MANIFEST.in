@@ -1,0 +1,1 @@
+recursive-include mask3d/conf *.yaml
