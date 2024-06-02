@@ -1,5 +1,5 @@
 ## Conda Environment
-'
+```
 export TORCH_CUDA_ARCH_LIST="6.0 6.1 6.2 7.0 7.2 7.5 8.0 8.6"
 
 conda env create -f environment.yml
@@ -43,4 +43,4 @@ mim install mmcv==2.0.0
  
 
 pip3 install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
-'
+```
