@@ -63,7 +63,7 @@ openyolo3d.save_output_as_ply("$(pwd)/sample/output.ply", True) # Save the ply f
 ```
 
 ## Acknoledgments
-We would like to thank the authors of <a href="https://github.com/cvg/Mask3D">Mask3D</a> and <a href="https://github.com/AILab-CVC/YOLO-World">YoloWorld</a> for their works which where used for our model.
+We would like to thank the authors of <a href="https://github.com/cvg/Mask3D">Mask3D</a> and <a href="https://github.com/AILab-CVC/YOLO-World">YoloWorld</a> for their works which were used for our model.
 </div>
 
 ## BibTeX :pray:
