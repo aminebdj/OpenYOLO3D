@@ -73,7 +73,7 @@ python run_evaluation.py --dataset_name replica --path_to_3d_masks "./output/rep
 python run_evaluation.py --dataset_name replica --path_to_3d_masks "./output/replica/replica_ground_truth_masks" --is_gt
 ```
 
-You can evaluate without our 3D class-agnostic masks, but this may lead to variability in results due to elements like furthest point sampling in Mask3D, which lead to different mask predictions in every run. For consistent results with the ones we report in the paper, we recommend using our pre-computed masks. 
+You can evaluate without our 3D class-agnostic masks, but this may lead to variability in results due to elements like furthest point sampling that cause randomness in predictions from Mask3D. For consistent results with the ones we report in the paper, we recommend using our pre-computed masks. 
 
 **Reproduce the results of Replica or ScanNet200 without using our pre-computed masks**
 ```
