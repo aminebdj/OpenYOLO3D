@@ -29,7 +29,7 @@
 <br>
 
 <div align="center">
-    <img src="./docs/pipeline.pdf" width="100%">
+    <img src="./docs/pipeline.png" width="100%">
 </div>
 
 ### Abstract
@@ -43,11 +43,10 @@ We empirically find that a better performance of matching text prompts to 3D mas
 ### Qualitative results
 <br>
 
-<!-- <div align="center">
-    <img src="./docs/qualitatives.pdf" width="100%">
-</div> -->
+<div align="center">
+    <img src="./docs/qualitatives.png" width="100%">
+</div>
 
-[Qualitative results on Replica Dataset](./docs/qualitatives.pdf)
 
 ## Installation guide
 
