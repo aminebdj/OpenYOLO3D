@@ -64,13 +64,20 @@ python run_evaluation.py --dataset_name scannet200 --path_to_3d_masks "./output/
 ```
 python run_evaluation.py --dataset_name scannet200 --path_to_3d_masks "./output/scannet200/scannet200_ground_truth_masks" --is_gt
 ```
-***Reproduce the results of Replica with precomputed-masks (using Mask3D)***
+***Reproduce the results of Replica with precomputed-masks (using Mask3D)**
 ```
 python run_evaluation.py --dataset_name replica --path_to_3d_masks "./output/replica/replica_masks"
 ```
-***Reproduce the results of Replica with oracle 3D masks (ground truth 3D masks)***
+***Reproduce the results of Replica with oracle 3D masks (ground truth 3D masks)**
 ```
 python run_evaluation.py --dataset_name replica --path_to_3d_masks "./output/replica/replica_ground_truth_masks" --is_gt
+```
+
+You can evaluate without our 3D class-agnostic masks, but this may lead to variability in results due to elements like furthest point sampling in Mask3D, which lead to different mask predictions in every run. For consistent results with the ones we report in the paper, we recommend using our pre-computed masks. 
+
+***Reproduce the results of Replica or ScanNet200 without using our pre-computed masks**
+```
+python run_evaluation.py --dataset_name $DATASET_NAME
 ```
 
 ## Single scene inference
