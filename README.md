@@ -46,11 +46,32 @@ We empirically find that a better performance of matching text prompts to 3D mas
 
 ## Installation guide
 
-Kindly check [Installation guide](./docs/Installation.md) on how to setup the Conda environment and download the checkpoints.
+Kindly check [Installation guide](./docs/Installation.md) on how to setup the Conda environment and to download the checkpoints, the pre-computed class agnostic masks, and the ground truth masks.
 
 ## Data Preparation
 
 Kindly check [Data Preparation guide](./docs/Data_prep.md) on how to prepare ScanNet200 and Replica datasets.
+
+## Results reproducibility
+
+Kindly use the pre-computed class agnostic masks we shared to reproduce the exact numbers we reported in the paper.
+
+# Reproduce the results of ScanNet200 with precomputed-masks (using Mask3D)
+```
+python run_evaluation.py --dataset_name scannet200 --path_to_3d_masks "./output/scannet200/scannet200_masks"
+```
+# Reproduce the results of ScanNet200 with oracle 3D masks (ground truth 3D masks)
+```
+python run_evaluation.py --dataset_name scannet200 --path_to_3d_masks "./output/scannet200/scannet200_ground_truth_masks" --is_gt
+```
+# Reproduce the results of Replica with precomputed-masks (using Mask3D)
+```
+python run_evaluation.py --dataset_name replica --path_to_3d_masks "./output/replica/replica_masks"
+```
+# Reproduce the results of Replica with oracle 3D masks (ground truth 3D masks)
+```
+python run_evaluation.py --dataset_name replica --path_to_3d_masks "./output/replica/replica_ground_truth_masks" --is_gt
+```
 
 ## Single scene inference
 
