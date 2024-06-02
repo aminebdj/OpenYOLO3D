@@ -46,7 +46,7 @@ We empirically find that a better performance of matching text prompts to 3D mas
 
 ## Installation guide
 
-Kindly check [Installation guide](./docs/Installation.md) on how to setup the Conda environment.
+Kindly check [Installation guide](./docs/Installation.md) on how to setup the Conda environment and download the checkpoints.
 
 ## Data Preparation
 
