@@ -43,9 +43,11 @@ We empirically find that a better performance of matching text prompts to 3D mas
 ### Qualitative results
 <br>
 
-<div align="center">
+<!-- <div align="center">
     <img src="./docs/qualitatives.pdf" width="100%">
-</div>
+</div> -->
+
+[Qualitative results on Replica Dataset](./docs/qualitatives.pdf)
 
 ## Installation guide
 
