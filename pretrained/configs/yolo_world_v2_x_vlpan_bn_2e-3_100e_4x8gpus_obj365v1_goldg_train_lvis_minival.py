@@ -1,6 +1,4 @@
-# _base_ = ('../../third_party/mmyolo/configs/yolov8/'
-#           'yolov8_x_syncbn_fast_8xb16-500e_coco.py') #/home/jean/Amine/OpenYolo3D/models/YOLO-World/third_party/mmyolo/configs/yolov8/yolov8_x_syncbn_fast_8xb16-500e_coco.py
-_base_ = ('/home/jean/Amine/OpenYolo3D/models/YOLO-World/third_party/mmyolo/configs/yolov8/'
+_base_ = ('$(pwd)/models/YOLO-World/third_party/mmyolo/configs/yolov8/'
           'yolov8_x_syncbn_fast_8xb16-500e_coco.py') 
 custom_imports = dict(imports=['yolo_world'],
                       allow_failed_imports=False)

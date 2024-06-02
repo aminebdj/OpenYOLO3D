@@ -169,6 +169,7 @@ def prepare_data(pointcloud_file, device):
         point2segment_full = segments
         point2segment = segments[unique_map]
         point2segment = [torch.from_numpy(point2segment).long()]
+        point2segment_full = [torch.from_numpy(point2segment_full).long()]
 
         # Concatenate all lists
         input_dict = {"coords": coordinates, "feats": features}
@@ -222,8 +223,7 @@ def map_output_to_pointcloud(outputs,
         result_pred_mask.sum(0) + 1e-6
     )
     score = scores_per_query * mask_scores_per_image
-    
-    result_pred_mask = get_full_res_mask(result_pred_mask, inverse_map, point2segment_full)
+    result_pred_mask = get_full_res_mask(result_pred_mask, inverse_map, point2segment_full[0]) if point2segment_full is not None else result_pred_mask[inverse_map]
     return (result_pred_mask, score)
 
 def get_full_res_mask(mask, inverse_map, point2segment_full):

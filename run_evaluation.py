@@ -1,6 +1,6 @@
 
 import torch
-import tqdm
+from tqdm import tqdm
 import argparse
 from evaluate import SCENE_NAMES_REPLICA, SCENE_NAMES_SCANNET200, evaluate_scannet200, evaluate_replica
 from utils import OpenYolo3D
@@ -36,14 +36,15 @@ def test_pipeline_full(dataset_type, path_to_3d_masks, is_gt):
     evaluator = InstSegEvaluator(dataset_type)
     openyolo3d = OpenYolo3D(f"./pretrained/config_{dataset_type}.yaml")
     predictions = {}
-    for scene_name in scene_names:
+    for scene_name in tqdm(scene_names):
         scene_id = scene_name.replace("scene", "")
         processed_file = osp.join(path_2_dataset, scene_name, f"{scene_id}.npy") if dataset_type == "scannet200" else None
         prediction = openyolo3d.predict(osp.join(path_2_dataset, scene_name), depth_scale, processed_file, path_to_3d_masks,is_gt)
         predictions.update(prediction)
     
     preds = {}
-    for scene_name in tqdm.tqdm(scene_names):
+    print("Evaluation ...")
+    for scene_name in tqdm(scene_names):
         preds[scene_name] = {
             'pred_masks': predictions[scene_name][0].cpu().numpy(),
             'pred_scores': torch.ones_like(predictions[scene_name][2]).cpu().numpy(),

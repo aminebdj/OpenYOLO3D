@@ -11,10 +11,10 @@ network2d:
   th: 0.08
   nms: 0.3
   use_amp: False
-  pretrained_path: "/home/jean/Amine/OpenYolo3D/pretrained/checkpoints/yolo_world_v2_x_obj365v1_goldg_cc3mlite_pretrain_1280ft-14996a36.pth"
-  config_path: "/home/jean/Amine/OpenYolo3D/pretrained/configs/yolo_world_v2_x_vlpan_bn_2e-3_100e_4x8gpus_obj365v1_goldg_train_lvis_minival.py"
+  pretrained_path: "$(pwd)/pretrained/checkpoints/yolo_world_v2_x_obj365v1_goldg_cc3mlite_pretrain_1280ft-14996a36.pth"
+  config_path: "$(pwd)/pretrained/configs/yolo_world_v2_x_vlpan_bn_2e-3_100e_4x8gpus_obj365v1_goldg_train_lvis_minival.py"
 
 network3d:
-  pretrained_path: "/home/jean/Amine/RT_OV3DIS/mask_extractor/pretrained/checkpoints/mask3d_ckpts/mask3d_A_t1/best_549.ckpt"
+  pretrained_path: "$(pwd)/pretrained/checkpoints/scannet200_val.ckpt"
   th: 0.04
   nms: 0.6
