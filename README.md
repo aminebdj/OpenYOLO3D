@@ -61,6 +61,9 @@ openyolo3d = OpenYolo3D("$(pwd)/pretrained/config.yaml") #Initialize the model, 
 prediction = openyolo3d.predict("$(pwd)/sample/scene_0011_00", 1000.0) #Predict the instance masks and labels (takes around 20 seconds in total).
 openyolo3d.save_output_as_ply("$(pwd)/sample/output.ply", True) # Save the ply file for visualization, you can use meshlab to visualize the output scene
 ```
+
+## Acknoledgments
+We would like to thank the authors of <a href="https://github.com/cvg/Mask3D">Mask3D</a> and <a href="https://github.com/AILab-CVC/YOLO-World">YoloWorld</a> for their works which where used for our model.
 </div>
 
 ## BibTeX :pray:
