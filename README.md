@@ -1,6 +1,9 @@
  <div align="center">
  
 ## Open-YOLO 3D: Towards Fast and Accurate Open-Vocabulary 3D Instance Segmentation
+<div align="center">
+    <img src="./docs/pipeline.png" width="100%">
+</div>
 
 </div>
 
@@ -25,12 +28,9 @@
 * **30 May 2024**: [Open-YOLO 3D]() released on arXiv. 📝
 * **30 May 2024**: Code released. 💻
 
-### Pipeline
+
 <br>
 
-<div align="center">
-    <img src="./docs/pipeline.png" width="100%">
-</div>
 
 ### Abstract
 
