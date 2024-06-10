@@ -44,3 +44,12 @@ mim install mmcv==2.0.0
 
 pip3 install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
 ```
+
+## Download the class agnostic masks
+```
+sh download_class_agn_masks.sh
+```
+## Get the checkpoints
+```
+sh get_checkpoints.sh
+```
