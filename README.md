@@ -86,7 +86,7 @@ python run_evaluation.py --dataset_name $DATASET_NAME
 from utils import OpenYolo3D
 
 openyolo3d = OpenYolo3D("$(pwd)/pretrained/config.yaml") #Initialize the model, define the text prompts in the config.
-prediction = openyolo3d.predict("$(pwd)/sample/scene_0011_00", 1000.0) #Predict the instance masks and labels (takes around 20 seconds in total).
+prediction = openyolo3d.predict("$(pwd)/data/replica/office0", 6553.5) #Predict the instance masks and labels (takes around 20 seconds in total).
 openyolo3d.save_output_as_ply("$(pwd)/sample/output.ply", True) # Save the ply file for visualization, you can use meshlab to visualize the output scene
 ```
 
