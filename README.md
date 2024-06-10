@@ -16,7 +16,7 @@
 
 <div align="center">
  
-<a href='' target="_blank">![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)</a> 
+<a href='https://arxiv.org/abs/2406.02548' target="_blank">![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)</a> 
 
 
  </div>
@@ -25,7 +25,7 @@
 
 ### News
 
-* **30 May 2024**: [Open-YOLO 3D]() released on arXiv. 📝
+* **30 May 2024**: [Open-YOLO 3D](https://arxiv.org/abs/2406.02548) released on arXiv. 📝
 * **30 May 2024**: Code released. 💻
 
 ### Abstract
@@ -96,6 +96,13 @@ We would like to thank the authors of <a href="https://github.com/cvg/Mask3D">Ma
 
 ## BibTeX :pray:
 ```
-
+@misc{boudjoghra2024openyolo,
+      title={Open-YOLO 3D: Towards Fast and Accurate Open-Vocabulary 3D Instance Segmentation}, 
+      author={Mohamed El Amine Boudjoghra and Angela Dai and Jean Lahoud and Hisham Cholakkal and Rao Muhammad Anwer and Salman Khan and Fahad Shahbaz Khan},
+      year={2024},
+      eprint={2406.02548},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 ```
 
