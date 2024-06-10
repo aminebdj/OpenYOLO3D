@@ -47,7 +47,7 @@ pip3 install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url htt
 
 ## Download the class agnostic masks
 ```
-sh download_class_agn_masks.sh
+sh get_class_agn_masks.sh
 ```
 ## Get the checkpoints
 ```
