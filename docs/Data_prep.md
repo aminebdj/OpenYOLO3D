@@ -33,7 +33,7 @@ ScanNet200 data folder should have the following structure
 
 Run the following command. 
 ```
-sh get_replica_dataset.sh
+sh scripts/get_replica_dataset.sh
 ```
 
 A replica folder with the following format will be generated.
