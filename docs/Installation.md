@@ -44,8 +44,13 @@ mim install mmcv==2.0.0
 
 pip3 install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
 ```
+## Download and unzip OpenYOLO3D.zip
 
-## Download the class agnostic masks
+Kindly use this (link)[https://mbzuaiac-my.sharepoint.com/personal/ival_lab_mbzuai_ac_ae/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fival%5Flab%5Fmbzuai%5Fac%5Fae%2FDocuments%2FOpenYOLO3D%2FOpenYOLO3D%2Ezip&parent=%2Fpersonal%2Fival%5Flab%5Fmbzuai%5Fac%5Fae%2FDocuments%2FOpenYOLO3D&ga=1] to download OpenYOLO3D.zip inside the parent directory `./OpenYOLO3D`, then unzip it to get `./OpenYOLO3D/OpenYOLO3D`. 
+
+In order to download the file with `wget` you can use the (CurlWget)[https://chromewebstore.google.com/detail/curlwget/dgcfkhmmpcmkikfmonjcalnjcmjcjjdn?hl=en]. 
+
+## get the class agnostic masks
 ```
 sh scripts/get_class_agn_masks.sh
 ```
