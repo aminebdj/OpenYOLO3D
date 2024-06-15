@@ -46,9 +46,9 @@ pip3 install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url htt
 ```
 ## Download and unzip OpenYOLO3D.zip
 
-Kindly use this (link)[https://mbzuaiac-my.sharepoint.com/personal/ival_lab_mbzuai_ac_ae/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fival%5Flab%5Fmbzuai%5Fac%5Fae%2FDocuments%2FOpenYOLO3D%2FOpenYOLO3D%2Ezip&parent=%2Fpersonal%2Fival%5Flab%5Fmbzuai%5Fac%5Fae%2FDocuments%2FOpenYOLO3D&ga=1] to download OpenYOLO3D.zip inside the parent directory `./OpenYOLO3D`, then unzip it to get `./OpenYOLO3D/OpenYOLO3D`. 
+Kindly use this <a href="https://mbzuaiac-my.sharepoint.com/personal/ival_lab_mbzuai_ac_ae/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fival%5Flab%5Fmbzuai%5Fac%5Fae%2FDocuments%2FOpenYOLO3D%2FOpenYOLO3D%2Ezip&parent=%2Fpersonal%2Fival%5Flab%5Fmbzuai%5Fac%5Fae%2FDocuments%2FOpenYOLO3D&ga=1">link</a> to download OpenYOLO3D.zip inside the parent directory `./OpenYOLO3D`, then unzip it to get `./OpenYOLO3D/OpenYOLO3D`. 
 
-In order to download the file with `wget` you can use the (CurlWget)[https://chromewebstore.google.com/detail/curlwget/dgcfkhmmpcmkikfmonjcalnjcmjcjjdn?hl=en]. 
+In order to download the file with `wget` you can use the <a href="https://chromewebstore.google.com/detail/curlwget/dgcfkhmmpcmkikfmonjcalnjcmjcjjdn?hl=en">CurlWget</a>. 
 
 ## get the class agnostic masks
 ```
