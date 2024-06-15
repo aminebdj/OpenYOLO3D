@@ -50,11 +50,11 @@ Kindly use this <a href="https://mbzuaiac-my.sharepoint.com/personal/ival_lab_mb
 
 In order to download the file with `wget` you can use the <a href="https://chromewebstore.google.com/detail/curlwget/dgcfkhmmpcmkikfmonjcalnjcmjcjjdn?hl=en">CurlWget</a>. 
 
-## get the class agnostic masks
+## Prepare the class agnostic masks
 ```
 sh scripts/get_class_agn_masks.sh
 ```
-## Get the checkpoints
+## Prepare the checkpoints
 ```
 sh scripts/get_checkpoints.sh
 ```
