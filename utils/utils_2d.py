@@ -42,10 +42,10 @@ class Network_2D():
         self.use_amp = config["network2d"]["use_amp"]
         self.resolution = None  
         self.frequency = config["openyolo3d"]["frequency"]
-        cfg = Config.fromfile(config["network2d"]["config_path"])
-        cfg.work_dir = osp.join('./yolo_world/work_dirs',
-                                osp.splitext(config["network2d"]["config_path"])[0])
-        cfg.load_from = config["network2d"]["pretrained_path"]
+        cfg = Config.fromfile(os.path.join(os.getcwd(), config["network2d"]["config_path"]))
+        cfg.work_dir = osp.join(f'{os.getcwd()}/models/YOLO-World/yolo_world/work_dirs',
+                                osp.splitext(config["network2d"]["config_path"])[0].split("/")[-1])
+        cfg.load_from = os.path.join(os.getcwd(), config["network2d"]["pretrained_path"])
         if 'runner_type' not in cfg:
             self.runner = Runner.from_cfg(cfg)
         else:

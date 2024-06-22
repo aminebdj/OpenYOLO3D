@@ -1,4 +1,5 @@
-_base_ = ('$(pwd)/models/YOLO-World/third_party/mmyolo/configs/yolov8/'
+import os
+_base_ = (f'{os.getcwd()}/models/YOLO-World/third_party/mmyolo/configs/yolov8/'
           'yolov8_x_syncbn_fast_8xb16-500e_coco.py') 
 custom_imports = dict(imports=['yolo_world'],
                       allow_failed_imports=False)

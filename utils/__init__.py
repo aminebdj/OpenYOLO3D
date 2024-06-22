@@ -122,8 +122,8 @@ class OpenYolo3D():
 
         print("[🚀 ACTION] 2D Bounding Boxes computation ...")
         start = time.time()
-        # self.preds_2d = self.network_2d.get_bounding_boxes(self.world2cam.color_paths)
-        self.preds_2d = torch.load(osp.join(f"/share/data/drive_3/OpenYolo3D/bboxes_2d", f"{scene_name}.pt"))
+        self.preds_2d = self.network_2d.get_bounding_boxes(self.world2cam.color_paths)
+        # self.preds_2d = torch.load(osp.join(f"/share/data/drive_3/OpenYolo3D/bboxes_2d", f"{scene_name}.pt"))
         print(f"[🕒 INFO] Elapsed time {(time.time()-start)}")
         print(f"[✅ INFO] Bounding boxes computed.")  
         
