@@ -30,8 +30,10 @@ def test_pipeline_full(dataset_type, path_to_3d_masks, is_gt):
     
     if dataset_type == "replica":
         scene_names = SCENE_NAMES_REPLICA
+        datatype="point cloud"
     elif dataset_type == "scannet200":
         scene_names = SCENE_NAMES_SCANNET200
+        datatype="mesh"
         
     evaluator = InstSegEvaluator(dataset_type)
     openyolo3d = OpenYolo3D(f"./pretrained/config_{dataset_type}.yaml")
@@ -39,7 +41,7 @@ def test_pipeline_full(dataset_type, path_to_3d_masks, is_gt):
     for scene_name in tqdm(scene_names):
         scene_id = scene_name.replace("scene", "")
         processed_file = osp.join(path_2_dataset, scene_name, f"{scene_id}.npy") if dataset_type == "scannet200" else None
-        prediction = openyolo3d.predict(osp.join(path_2_dataset, scene_name), depth_scale, processed_file, path_to_3d_masks,is_gt)
+        prediction = openyolo3d.predict(osp.join(path_2_dataset, scene_name), depth_scale, datatype, processed_file, path_to_3d_masks,is_gt)
         predictions.update(prediction)
     
     preds = {}

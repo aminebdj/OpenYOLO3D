@@ -11,8 +11,8 @@ class Network_3D():
         self.device = torch.device("cuda:0")
         self.model.to(self.device)
     
-    def get_class_agnostic_masks(self, pointcloud_file, point2segment=None):
-        data, points, colors, features, unique_map, inverse_map, point2segment, point2segment_full = prepare_data(pointcloud_file, self.device)
+    def get_class_agnostic_masks(self, pointcloud_file, datatype="point cloud", point2segment=None):
+        data, points, colors, features, unique_map, inverse_map, point2segment, point2segment_full = prepare_data(pointcloud_file, datatype, self.device)
         with torch.no_grad():
             outputs = self.model(data, raw_coordinates=features, point2segment=[point2segment] if point2segment is not None else None)
         return map_output_to_pointcloud(outputs, inverse_map, point2segment, point2segment_full)

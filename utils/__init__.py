@@ -9,7 +9,7 @@ import glob
 import open3d as o3d
 import numpy as np
 import math
-from models.Mask3D.mask3d import load_mesh, load_ply
+from models.Mask3D.mask3d import load_mesh_or_pc
 import colorsys
 from tqdm import tqdm
 
@@ -100,7 +100,8 @@ class OpenYolo3D():
         self.network_2d = Network_2D(config)
         self.openyolo3d_config = config
     
-    def predict(self, path_2_scene_data, depth_scale, processed_scene = None, path_to_3d_masks = None, is_gt=False):
+    def predict(self, path_2_scene_data, depth_scale, datatype="point cloud", processed_scene = None, path_to_3d_masks = None, is_gt=False):
+        self.datatype = datatype
         self.world2cam = WORLD_2_CAM(path_2_scene_data, depth_scale, self.openyolo3d_config)
         self.mesh_projections = self.world2cam.get_mesh_projections()
         self.scaling_params = [self.world2cam.depth_resolution[0]/self.world2cam.image_resolution[0], self.world2cam.depth_resolution[1]/self.world2cam.image_resolution[1]]
@@ -110,7 +111,7 @@ class OpenYolo3D():
         start = time.time()
         
         if path_to_3d_masks is None:
-            self.preds_3d = self.network_3d.get_class_agnostic_masks(self.world2cam.mesh) if processed_scene is None else self.network_3d.get_class_agnostic_masks(processed_scene)
+            self.preds_3d = self.network_3d.get_class_agnostic_masks(self.world2cam.mesh, datatype) if processed_scene is None else self.network_3d.get_class_agnostic_masks(processed_scene, datatype)
             keep_score = self.preds_3d[1] >= self.openyolo3d_config["network3d"]["th"]
             keep_nms = apply_nms(self.preds_3d[0][:, keep_score].cuda(), self.preds_3d[1][keep_score].cuda(), self.openyolo3d_config["network3d"]["nms"])
             self.preds_3d = (self.preds_3d[0].cpu().permute(1,0)[keep_score][keep_nms].permute(1,0), self.preds_3d[1].cpu()[keep_score][keep_nms])
@@ -284,20 +285,42 @@ class OpenYolo3D():
         else:   
             th = self.predicated_scores.max()-0.1 
             
-        mesh = load_mesh(self.world2cam.mesh)
-        vertex_colors = np.asarray(mesh.vertex_colors)
-        vibrant_colors = generate_vibrant_colors(len(self.predicated_scores[self.predicated_scores >= th]))
-        color_id = 0
-        for i, class_id in enumerate(self.predicated_classes):
-            if self.predicated_scores[i] < th:
-                continue
-            if len(vibrant_colors) == 0:
-                break
-            mask = self.predicted_masks.permute(1,0)[i]
-            vertex_colors[mask] = np.array(vibrant_colors.pop())
-            color_id += 1
-        mesh.vertex_colors = o3d.utility.Vector3dVector(vertex_colors)
-        o3d.io.write_triangle_mesh(save_path, mesh)
+        data = load_mesh_or_pc(self.world2cam.mesh, self.datatype)
+        if self.datatype == 'mesh':
+            mesh = data
+            vertex_colors = np.asarray(mesh.vertex_colors)
+            vibrant_colors = generate_vibrant_colors(len(self.predicated_scores[self.predicated_scores >= th]))
+            color_id = 0
+            for i, class_id in enumerate(self.predicated_classes):
+                if self.predicated_scores[i] < th:
+                    continue
+                if len(vibrant_colors) == 0:
+                    break
+                mask = self.predicted_masks.permute(1,0)[i]
+                vertex_colors[mask] = np.array(vibrant_colors.pop())
+                color_id += 1
+            mesh.vertex_colors = o3d.utility.Vector3dVector(vertex_colors)
+            o3d.io.write_triangle_mesh(save_path, mesh)
+        elif self.datatype == 'point cloud':
+            point_cloud = data
+            point_colors = np.asarray(point_cloud.colors)
+            vibrant_colors = generate_vibrant_colors(len(self.predicated_scores[self.predicated_scores >= th]))
+
+            color_id = 0
+            for i, class_id in enumerate(self.predicated_classes):
+                if self.predicated_scores[i] < th:
+                    continue
+                if len(vibrant_colors) == 0:
+                    break
+                mask = self.predicted_masks.permute(1, 0)[i] 
+                point_colors[mask] = np.array(vibrant_colors.pop())
+                color_id += 1
+
+            point_cloud.colors = o3d.utility.Vector3dVector(point_colors)
+            o3d.io.write_point_cloud(save_path, point_cloud)
+        else:
+            print("[ERROR] output is not saved, please check input 3D scene folder.")
+            exit()
     
 
 

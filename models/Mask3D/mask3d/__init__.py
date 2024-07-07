@@ -109,26 +109,35 @@ def load_ply(path_2_mesh):
     pcd = o3d.io.read_point_cloud(path_2_mesh)
     return pcd
 
-def prepare_data(pointcloud_file, device):
+def load_mesh_or_pc(pointcloud_file, datatype):
+    
+    if pointcloud_file.split('.')[-1] == 'ply':
+        if datatype == "mesh":
+            data = load_mesh(pointcloud_file)
+        elif datatype == "point cloud":
+            data = load_ply(pointcloud_file)
+            
+        if datatype is None:
+            print("DATA TYPE IS NOT SUPPORTED!")
+            exit()
+    return data
+
+def prepare_data(pointcloud_file, datatype, device):
     # normalization for point cloud features
     color_mean = (0.47793125906962, 0.4303257521323044, 0.3749598901421883)
     color_std = (0.2834475483823543, 0.27566157565723015, 0.27018971370874995)
     normalize_color = A.Normalize(mean=color_mean, std=color_std)
     
-    datatype = None
-    
     if pointcloud_file.split('.')[-1] == 'ply':
-        try:
+        if datatype == "mesh":
             mesh = load_mesh(pointcloud_file)
             points = np.asarray(mesh.vertices)
             colors = np.asarray(mesh.vertex_colors)
             colors = colors * 255.
-            datatype = "mesh"
-        except:
+        elif datatype == "point cloud":
             pcd = load_ply(pointcloud_file)
             points = np.asarray(pcd.points)
             colors = np.asarray(pcd.colors)
-            datatype = "point cloud"
             
         if datatype is None:
             print("DATA TYPE IS NOT SUPPORTED!")
