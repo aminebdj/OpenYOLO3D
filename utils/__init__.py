@@ -100,7 +100,7 @@ class OpenYolo3D():
         self.network_2d = Network_2D(config)
         self.openyolo3d_config = config
     
-    def predict(self, path_2_scene_data, depth_scale, datatype="point cloud", processed_scene = None, path_to_3d_masks = None, is_gt=False):
+    def predict(self, path_2_scene_data, depth_scale, text = None, datatype="point cloud", processed_scene = None, path_to_3d_masks = None, is_gt=False):
         self.datatype = datatype
         self.world2cam = WORLD_2_CAM(path_2_scene_data, depth_scale, self.openyolo3d_config)
         self.mesh_projections = self.world2cam.get_mesh_projections()
@@ -123,7 +123,7 @@ class OpenYolo3D():
 
         print("[🚀 ACTION] 2D Bounding Boxes computation ...")
         start = time.time()
-        self.preds_2d = self.network_2d.get_bounding_boxes(self.world2cam.color_paths)
+        self.preds_2d = self.network_2d.get_bounding_boxes(self.world2cam.color_paths, text)
         # self.preds_2d = torch.load(osp.join(f"/share/data/drive_3/OpenYolo3D/bboxes_2d", f"{scene_name}.pt"))
         print(f"[🕒 INFO] Elapsed time {(time.time()-start)}")
         print(f"[✅ INFO] Bounding boxes computed.")  

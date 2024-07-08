@@ -57,7 +57,8 @@ class Network_2D():
         self.runner.pipeline = Compose(pipeline)
         self.runner.model.eval() 
 
-    def get_bounding_boxes(self, path_2_images):  
+    def get_bounding_boxes(self, path_2_images, text=None): 
+        self.texts = [[t] for t in text] + [[' ']] if text is not None else self.texts 
         print(f"Infering from {len(path_2_images)} images")
         
         scene_preds = {}
@@ -67,6 +68,7 @@ class Network_2D():
         return scene_preds
 
     def inference_detector(self, images_batch):
+        
         if self.resolution is None:
             self.resolution = get_image_resolution(images_batch[0])
         inputs = []
