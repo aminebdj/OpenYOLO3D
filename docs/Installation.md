@@ -51,7 +51,8 @@ pip3 install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url htt
 mim install mmcv==2.0.0
 pip install open3d
 pip install pillow==9.1.0
- 
+
+python -m pip install pyviz3d # optional for visualization
 
 ```
 ## Prepare the class agnostic masks

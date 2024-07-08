@@ -1,5 +1,5 @@
 openyolo3d:
-  frequency: 10
+  frequency: 1
   vis_depth_threshold: 0.05
   depth_scale: 1000.0
   topk: 25
