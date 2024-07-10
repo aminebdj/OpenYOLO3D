@@ -279,42 +279,40 @@ class OpenYolo3D():
                 
         return label_maps
     
-    def save_output_as_ply(self, save_path, highest_score = True):
-        if highest_score :
-            th = self.predicated_scores.max()
-        else:   
-            th = self.predicated_scores.max()-0.1 
-            
+    def save_output_as_ply(self, save_path, th = 0.1):
+        num_classes = len(self.predicated_classes.unique())
         data = load_mesh_or_pc(self.world2cam.mesh, self.datatype)
         if self.datatype == 'mesh':
             mesh = data
             vertex_colors = np.asarray(mesh.vertex_colors)
-            vibrant_colors = generate_vibrant_colors(len(self.predicated_scores[self.predicated_scores >= th]))
-            color_id = 0
-            for i, class_id in enumerate(self.predicated_classes):
-                if self.predicated_scores[i] < th:
+            vibrant_colors = generate_vibrant_colors(num_classes)
+
+            for i, class_id in enumerate((self.predicated_classes).unique()):
+                if class_id == -1:
                     continue
-                if len(vibrant_colors) == 0:
-                    break
-                mask = self.predicted_masks.permute(1,0)[i]
+                class_id_mask = self.predicated_classes == class_id
+                scores_per_class = self.predicated_scores[class_id_mask]
+                class_id_max = torch.argmax(scores_per_class)
+                mask = self.predicted_masks.permute(1,0)[class_id_mask][class_id_max]
                 vertex_colors[mask] = np.array(vibrant_colors.pop())
-                color_id += 1
+                
             mesh.vertex_colors = o3d.utility.Vector3dVector(vertex_colors)
             o3d.io.write_triangle_mesh(save_path, mesh)
         elif self.datatype == 'point cloud':
             point_cloud = data
             point_colors = np.asarray(point_cloud.colors)
-            vibrant_colors = generate_vibrant_colors(len(self.predicated_scores[self.predicated_scores >= th]))
+            vibrant_colors = generate_vibrant_colors(num_classes)
 
-            color_id = 0
-            for i, class_id in enumerate(self.predicated_classes):
-                if self.predicated_scores[i] < th:
+            for i, class_id in enumerate(self.predicated_classes.unique()):
+                if class_id == -1:
                     continue
-                if len(vibrant_colors) == 0:
-                    break
-                mask = self.predicted_masks.permute(1, 0)[i] 
+                class_id_mask = self.predicated_classes == class_id
+                scores_per_class = self.predicated_scores[class_id_mask]
+                class_id_max = torch.argmax(scores_per_class)
+                if scores_per_class[class_id_max] < th:
+                    continue
+                mask = self.predicted_masks.permute(1,0)[class_id_mask][class_id_max]
                 point_colors[mask] = np.array(vibrant_colors.pop())
-                color_id += 1
 
             point_cloud.colors = o3d.utility.Vector3dVector(point_colors)
             o3d.io.write_point_cloud(save_path, point_cloud)

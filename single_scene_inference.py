@@ -6,7 +6,7 @@ import numpy as np
 
 openyolo3d = OpenYolo3D(f"{os.getcwd()}/pretrained/config.yaml")
 prediction = openyolo3d.predict(path_2_scene_data=f"{os.getcwd()}/data/replica/office0", depth_scale=6553.5, text = ["chair"]) 
-openyolo3d.save_output_as_ply(f"{os.getcwd()}/output.ply", True) 
+openyolo3d.save_output_as_ply(f"{os.getcwd()}/output.ply") 
 
 
 pc = load_mesh_or_pc(f"{os.getcwd()}/output.ply", datatype="point cloud")
