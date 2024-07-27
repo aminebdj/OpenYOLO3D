@@ -75,7 +75,7 @@ for pred_id, i in enumerate(range(len(VALID_CLASS_IDS))):
     ID_TO_LABEL[VALID_CLASS_IDS[i]] = CLASS_LABELS[i]
 
 # PRED_ID_TO_ID[-1] = -1
-PRED_ID_TO_ID[48] = -1
+PRED_ID_TO_ID[48] = -1 
 
 SKIPPED_CLASSES = ["undefined", "floor", "ceiling", "wall"]
 

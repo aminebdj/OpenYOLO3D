@@ -101,6 +101,7 @@ class OpenYolo3D():
         self.openyolo3d_config = config
     
     def predict(self, path_2_scene_data, depth_scale, text = None, datatype="point cloud", processed_scene = None, path_to_3d_masks = None, is_gt=False):
+        self.num_classes = len(text)+1 if text is not None else len(self.openyolo3d_config["network2d"]["text_prompts"])+1
         self.datatype = datatype
         self.world2cam = WORLD_2_CAM(path_2_scene_data, depth_scale, self.openyolo3d_config)
         self.mesh_projections = self.world2cam.get_mesh_projections()
@@ -203,7 +204,7 @@ class OpenYolo3D():
             labels_distribution = np.concatenate(labels_distribution) if len(labels_distribution) > 0 else np.array([-1])
             
             # class_dists.append(labels_distribution)
-            distribution = torch.zeros(self.openyolo3d_config["openyolo3d"]["num_classes"]) if self.openyolo3d_config["openyolo3d"]["topk_per_image"] != -1 else None
+            distribution = torch.zeros(self.num_classes) if self.openyolo3d_config["openyolo3d"]["topk_per_image"] != -1 else None
             if (labels_distribution != -1).sum() != 0:
                 
                 if distribution is not None:
@@ -219,7 +220,7 @@ class OpenYolo3D():
             else:
                 if distribution is not None:
                     distribution[-1] = 1.0
-                class_label = -1
+                class_label = self.num_classes-1
                 class_prob = 0.0
 
             iou_vals = torch.tensor(iou_vals)
@@ -237,14 +238,14 @@ class OpenYolo3D():
         pred_classes = torch.tensor(class_labels)
         pred_scores = torch.tensor(class_probs)
         if distribution is not None:
-            distributions = torch.stack(distributions) if len(distributions) > 0 else torch.tensor((0, self.openyolo3d_config["openyolo3d"]["num_classes"]))
+            distributions = torch.stack(distributions) if len(distributions) > 0 else torch.tensor((0, self.num_classes))
         
         if (self.openyolo3d_config["openyolo3d"]["topk_per_image"] != -1) and (not is_gt):
             # print("TOPK USED")
             n_instance = distributions.shape[0]
             distributions = distributions.reshape(-1)
             labels = (
-            torch.arange(self.openyolo3d_config["openyolo3d"]["num_classes"], device=distributions.device)
+            torch.arange(self.num_classes, device=distributions.device)
             .unsqueeze(0)
             .repeat(n_instance, 1)
             .flatten(0, 1)
@@ -252,7 +253,7 @@ class OpenYolo3D():
 
             cur_topk = self.openyolo3d_config["openyolo3d"]["topk_per_image"]
             _, idx = torch.topk(distributions, k=min(cur_topk, len(distributions)), largest=True)
-            mask_idx = torch.div(idx, self.openyolo3d_config["openyolo3d"]["num_classes"], rounding_mode="floor")
+            mask_idx = torch.div(idx, self.num_classes, rounding_mode="floor")
 
             pred_classes = labels[idx]
             pred_scores = distributions[idx].cuda()
@@ -288,7 +289,7 @@ class OpenYolo3D():
             vibrant_colors = generate_vibrant_colors(num_classes)
 
             for i, class_id in enumerate((self.predicated_classes).unique()):
-                if class_id == -1:
+                if class_id == self.num_classes-1:
                     continue
                 class_id_mask = self.predicated_classes == class_id
                 scores_per_class = self.predicated_scores[class_id_mask]
@@ -302,9 +303,8 @@ class OpenYolo3D():
             point_cloud = data
             point_colors = np.asarray(point_cloud.colors)
             vibrant_colors = generate_vibrant_colors(num_classes)
-
             for i, class_id in enumerate(self.predicated_classes.unique()):
-                if class_id == -1:
+                if class_id == self.num_classes-1:
                     continue
                 class_id_mask = self.predicated_classes == class_id
                 scores_per_class = self.predicated_scores[class_id_mask]
