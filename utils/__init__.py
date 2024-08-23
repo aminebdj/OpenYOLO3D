@@ -194,7 +194,7 @@ class OpenYolo3D():
                 boxes = bounding_boxes_valid[representitive_frame_id]["bbox"].long()
                 if len(boxes) > 0 and len(instance_x_y_coords > 10):
                     x_l, x_r, y_t, y_b = instance_x_y_coords[:, 0].min(), instance_x_y_coords[:, 0].max()+1, instance_x_y_coords[:, 1].min(), instance_x_y_coords[:, 1].max()+1
-                    box = torch.tensor([x_l, y_t, x_r, y_b])
+                    box = torch.tensor([x_l/self.scaling_params[1], y_t/self.scaling_params[0], x_r/self.scaling_params[1], y_b/self.scaling_params[0]])
                 
                     iou_values = compute_iou(box, boxes)
                     iou_vals.append(iou_values.max().item())
