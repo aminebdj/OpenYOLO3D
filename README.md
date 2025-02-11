@@ -1,7 +1,7 @@
  <div align="center">
  
 ## Open-YOLO 3D: Towards Fast and Accurate Open-Vocabulary 3D Instance Segmentation
-## [ICLR 2025 (Oral 📢) ] 
+## ICLR 2025 (Oral 📢) 
 <div align="center">
     <img src="./docs/pipeline.png" width="100%">
 </div>
